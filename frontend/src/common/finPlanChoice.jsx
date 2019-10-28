@@ -155,9 +155,9 @@ class FinPlanChoice extends Component {
     this.setState({ value, open: false });
   };
 
-  createJob = (jobName, jobPayment, jobCredit) => () => {
+  createJob = (variant) => () => {
     let studentId = this.props.studentId;
-    this.props.dispatch(newJob(jobName, jobPayment, jobCredit, studentId));
+    this.props.dispatch(newJob(variant, studentId));
     this.handleClose();
   };
 
@@ -226,7 +226,7 @@ class FinPlanChoice extends Component {
             </Card>
             <div className={classes.selectionContainer}>
               <SelectionCard
-                onClick={this.createJob("Grafički dizajn", 5500, 640)}
+                onClick={this.createJob(1)}
                 classes={classes}
                 image={graphicDesignImage}
                 title={"Upis tečaj grafičkog dizajna"}
@@ -239,7 +239,7 @@ class FinPlanChoice extends Component {
                 priceText={"Cijena tečaja: 25.000 HRK"}
               />
               <SelectionCard
-                onClick={this.createJob("Školovanje", 7500, 2348)}
+                onClick={this.createJob(2)}
                 classes={classes}
                 image={schoolImage}
                 title={"Nastavak školovanja uz rad"}

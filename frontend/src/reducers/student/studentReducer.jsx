@@ -5,39 +5,22 @@ let stateDefault = {
   lastName: null,
   email: null,
   solutions: [],
-  fail: false
 };
 
 export default function reducer(state = stateDefault, action) {
   let newState = { ...state };
   switch (action.type) {
-    case "LOAD_STUDENT_FULFILLED": {
-      console.log("OVO JE PAYLOAD");
-      console.log(action.payload);
-      let user = action.payload.data;
-      if (action.payload.data == undefined) {
-        user = action.payload;
-      }
-      console.log(user);
-      let {
-        id,
-        gradeId,
-        firstName,
-        lastName,
-        email,
-        solutions,
-        notifications
-      } = user;
+    case "LOAD_USER_FULFILLED": {
+      let { data } = action.payload;
+      let { user, type } = data;
+      if(type !== "STUDENT") return null;
       newState = {
-        ...state,
-        id,
-        gradeId,
-        firstName,
-        lastName,
-        email,
-        solutions,
-        notifications,
-        fail: false
+        id: user.id,
+        gradeId: user.gradeId,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        solutions: user.solutions,
       };
       break;
     }
@@ -64,12 +47,12 @@ export default function reducer(state = stateDefault, action) {
       newState = { ...state, solutions: oldSolutions };
       break;
     }
-    case "LOAD_STUDENT_REJECTED": {
+    case "LOAD_USER_FAILED": {
       newState = { ...state, fail: true };
       break;
     }
-    case "LOAD_USER_FAILED": {
-      newState = { ...state, fail: true };
+    case "LOGOUT_USER_FULFILLED": {
+      newState = stateDefault;
       break;
     }
   }

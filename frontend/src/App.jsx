@@ -24,7 +24,7 @@ const styles = theme => ({
 })
 
 class App extends Component {
-	state = { open: null }
+	state = { open: null };
 	expandTab = panel => (event, expanded) => {
 		if (panel === this.state.open) {
 			this.setState({ open: null })
@@ -32,7 +32,7 @@ class App extends Component {
 		else {
 			this.setState({ open: panel })
 		}
-	}
+	};
 	render() {
 		const { classes } = this.props
 		return (

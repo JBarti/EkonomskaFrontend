@@ -8,10 +8,8 @@ import ContentCard from '../content-card/contentCard'
 
 const styles = theme => ({
     root: {
-        display: 'inline-block',
         position: 'absolute',
         bottom: -65,
-        right: 0,
         height: '100%',
         display: 'flex',
         flexDirection: 'column',

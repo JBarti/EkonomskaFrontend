@@ -1,28 +1,13 @@
+import { API_ENDPOINT } from "../data/apiRoutes";
+
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-const API_ENDPOINT = "https://f-pismenost.herokuapp.com";
-const API_ENDPOINTL = "http://0.0.0.0:3001";
-
-export function loadStudent(email, password) {
-  return {
-    type: "LOAD_STUDENT",
-    payload: axios.post(
-      API_ENDPOINT + "/login",
-      { email, password },
-      {
-        Headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      }
-    )
-  };
-}
 
 export function loadSession() {
   return {
-    type: "LOAD_PROFFESOR",
+    type: "LOAD_USER",
     payload: axios.get(API_ENDPOINT + "/proffesor/")
   };
 }

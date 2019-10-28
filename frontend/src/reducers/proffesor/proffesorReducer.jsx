@@ -4,24 +4,21 @@ let stateDefault = {
   firstName: null,
   lastName: null,
   email: null,
-  fail: false
 };
 
 export default function reducer(state = stateDefault, action) {
   let newState = { ...state };
   switch (action.type) {
-    case "LOAD_PROFFESOR_FULFILLED": {
-      console.log("OVO JE PAYLOAD");
-      console.log(action);
-      let user = action.payload.data ? action.payload.data : action.payload;
-      let { id, firstName, lastName, email } = user;
-      newState = { ...state, id, firstName, lastName, email, fail: false };
+    case "LOAD_USER_FULFILLED": {
+      const { data } = action.payload;
+      const { user, type } = data;
+      if(type !== "PROFFESOR") return stateDefault;
+      const { id, firstName, lastName, email } = user;
+      newState = { id, firstName, lastName, email};
       break;
     }
-    case "LOAD_PROFFESOR_REJECTED": {
-      console.log("OVO JE PAYLOAD");
-      console.log(action);
-      newState = { ...state, fail: true };
+    case "LOGOUT_USER_FULFILLED": {
+      newState = stateDefault;
       break;
     }
   }

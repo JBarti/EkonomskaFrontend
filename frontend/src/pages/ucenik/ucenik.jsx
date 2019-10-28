@@ -35,7 +35,7 @@ class Ucenik extends Component {
 
   componentDidUpdate() {
     console.log(this.props.fail);
-    if (this.props.fail) {
+    if (this.props.fail || !this.props.studentId) {
       this.setState({ redirect: <Redirect to="/" /> });
     }
   }
@@ -54,6 +54,7 @@ class Ucenik extends Component {
 }
 export default connect(store => {
   return {
-    fail: store.student.fail
+    fail: store.student.fail,
+    studentId: store.student.id,
   };
 })(withStyles(styles)(Ucenik));

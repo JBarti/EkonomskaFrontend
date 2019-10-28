@@ -8,11 +8,11 @@ let stateDefault = {
 export default function reducer(state = stateDefault, action) {
   let newState = { ...state };
   switch (action.type) {
-    case "LOAD_PROFFESOR_FULFILLED": {
-      let user = action.payload.data ? action.payload.data : action.payload;
+    case "LOAD_USER_FULFILLED": {
+      const { data } = action.payload;
+      const { user, type } = data;
+      if(type !== "PROFFESOR") return stateDefault;
       let all = user.grades;
-      console.log("GRADES");
-      console.log(all);
       newState = { ...state, all };
       break;
     }

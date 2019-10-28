@@ -117,10 +117,10 @@ class FinPlanChoice extends Component {
 
   progress = () => {
     let { studentId, variant } = this.props;
-    let outcome = variant == 2 ? 7200 : 5600;
-    let duration = variant == 2 ? 5 : 4;
-
-    this.props.dispatch(unexpectedOutcome(studentId, outcome, duration));
+    console.log(">>>>>>>>>>>>>>>>>>>>");
+    console.log( { variant } );
+    console.log(">>>>>>>>>>>>>>>>>>>>");
+    this.props.dispatch(unexpectedOutcome(studentId, variant));
     this.handleClose();
   };
 

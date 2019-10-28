@@ -188,16 +188,14 @@ class FinanceInvestment extends Component {
         }, 0);
 
     savings *= 12;
-    console.log("SEJVINGS", savings);
     return savings;
   };
 
-  selectInvestment = interestRate => () => {
+  selectInvestment = variant => () => {
     let savings = this.getSavings();
-    console.log("SAVINGS", savings);
     this.handleClose();
     this.props.dispatch(
-      newInvestment(this.props.studentId, savings, interestRate)
+      newInvestment(this.props.studentId, savings, variant)
     );
   };
 
@@ -312,7 +310,7 @@ class FinanceInvestment extends Component {
                   <Button
                     variant={"contained"}
                     color={"secondary"}
-                    onClick={this.selectInvestment(0)}
+                    onClick={this.selectInvestment(1)}
                   >
                     Prihvati
                   </Button>
@@ -328,7 +326,7 @@ class FinanceInvestment extends Component {
                   classes={classes}
                   image={graphicDesignImage}
                   title={"Oročena štednja"}
-                  onClick={this.selectInvestment(0.5)}
+                  onClick={this.selectInvestment(2)}
                   primaryText={
                     "Odlučili ste nakon dvije godine svoju ušteđevinu uložiti na banku kao oročenu štednju."
                   }
@@ -338,7 +336,7 @@ class FinanceInvestment extends Component {
                   classes={classes}
                   image={schoolImage}
                   title={"Ulaganje u investicijski fond"}
-                  onClick={this.selectInvestment(4)}
+                  onClick={this.selectInvestment(3)}
                   primaryText={
                     "Svoju ušteđevinu odlučili ste uložiti u investicijski fond. To je jako rizično ulaganje i očekivan povrat nemora se uvijek ostvariti."
                   }
@@ -348,7 +346,7 @@ class FinanceInvestment extends Component {
                   classes={classes}
                   image={schoolImage}
                   title={"Ulaganje u obveznice"}
-                  onClick={this.selectInvestment(6)}
+                  onClick={this.selectInvestment(4)}
                   primaryText={
                     "Odlučili ste svoju ušteđevinu staviti u državne obveznice. Maksimalni povrat je manji nego kod ulaganja u investicijski fond, ali nemate rizik od gubljenja novca."
                   }

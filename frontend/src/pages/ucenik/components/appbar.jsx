@@ -4,7 +4,7 @@ import { Typography, Icon, Button, Chip, Avatar } from "@material-ui/core";
 import Appbar from "../../../common/appbar/appbar";
 import FinPlanChoice from "../../../common/finPlanChoice";
 import { Redirect } from "react-router";
-import { logOut } from "../../../actions/studentActions";
+import { logoutUser } from "../../../actions/globalActions";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -29,7 +29,7 @@ class UcenikAppBar extends Component {
   };
   logOut = () => {
     let { dispatch } = this.props;
-    dispatch(logOut());
+    dispatch(logoutUser());
     this.setState({ redirect: <Redirect to="/" /> });
   };
 
@@ -57,8 +57,7 @@ class UcenikAppBar extends Component {
           variant="outlined"
           style={{ color: "white" }}
         >
-          {" "}
-          Odjava{" "}
+          Odjava
         </Button>
         {this.state.redirect}
       </Appbar>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API_ENDPOINT, UCENIK } from '../apiRoutes'
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 let ucenikApi = {
     login: ({ email, password }) => {

@@ -7,13 +7,15 @@ export default function reducer(state = stateDefault, action) {
 
   switch (action.type) {
     case "LOAD_STUDENT_FULFILLED": {
-      let user = action.payload.data;
-      if (action.payload.data == undefined) {
-        user = action.payload;
-      }
+      const { data } = action.payload;
+      const { user, type } = data;
+      if (type !== "STUDENT") return stateDefault;
       let { notifications } = user;
-      console.log("USER DVA", user);
-      newState.all = notifications;
+      newState = { all: notifications };
+      break;
+    }
+    case "LOGOUT_USER_FULFILLED": {
+      newState = stateDefault;
       break;
     }
   }

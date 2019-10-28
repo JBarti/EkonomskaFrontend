@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Icon, Button, Chip, Avatar } from "@material-ui/core";
 import Appbar from "../../../common/appbar/appbar";
-import { logOut } from "../../../actions/proffesorActions";
+import { logoutUser } from "../../../actions/globalActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import "./appbar.css";
@@ -35,7 +35,7 @@ class UcenikAppBar extends Component {
 
   logOut = () => {
     let { dispatch } = this.props;
-    dispatch(logOut());
+    dispatch(logoutUser());
     this.setState({ redirect: <Redirect to="/" /> });
   };
 
@@ -59,8 +59,7 @@ class UcenikAppBar extends Component {
           </div>
         </div>
         <Button onClick={this.logOut} variant="outlined" style={{ color: "white" }}>
-          {" "}
-          Odjava{" "}
+          Odjava
         </Button>
         {this.state.redirect}
       </Appbar>

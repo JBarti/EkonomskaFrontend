@@ -12,6 +12,7 @@ import OutcomeCard from "../../../common/outcomeCard";
 import GoalsFulfilledCard from "../../../common/goalsFulfilledCard";
 import TotalCard from "./totalCard";
 import MonthlyCard from "../../../common/monthlyCard";
+import { loadSession } from "../../../actions/studentActions";
 
 const styles = theme => ({
   fix: {
@@ -40,13 +41,12 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(newProp) {
+    loadSession();
     this.setState(newProp);
   }
 
   outcomeSliderChange = event => {
     let outcomes = [...this.state.outcomes];
-    console.log(outcomes);
-    console.log(event.target.name);
     outcomes.find(outcome => outcome.id == event.target.name).change = Number(
       event.target.value
     );
@@ -66,17 +66,22 @@ class Dashboard extends Component {
     let solvedTests = solutions
       .filter(solution => !!solution)
       .map(solution => solution.testId);
+    console.log({fees: this.props.fees});
 
     let financeVariant = this.props.fees.find(fee => {
       return fee.name == "Grafiči dizajn";
     })
       ? 1
       : 0;
-    financeVariant = this.props.fees.find(fee => {
+
+    if (! financeVariant) {
+      financeVariant = this.props.fees.find(fee => {
       return fee.name == "Školovanje";
     })
       ? 2
       : 0;
+    }
+
 
     return (
       <div style={{ height: "calc(100% - 65px)" }}>
@@ -93,8 +98,7 @@ class Dashboard extends Component {
         ) : (
           <div />
         )}
-
-        <Row>
+        {notifications.length || solutions.length ? <Row>
           {notifications.length ? (
             <NotificationCard notifications={notifications} />
           ) : (
@@ -105,7 +109,7 @@ class Dashboard extends Component {
           ) : (
             <div />
           )}
-        </Row>
+        </Row> : <div />}
 
         <Row>
           <IncomeCard payment={this.state.job} fees={this.state.fees} />

@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ContentCard from "../common/content-card/contentCard";
+import { API_ENDPOINT } from "../data/apiRoutes";
 import wallpaper from "../images/wallpaper.jpg";
 import TextField from "@material-ui/core/TextField";
 import { Typography, Input } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { loadStudent, registerStudent } from "../actions/studentActions";
+import { registerStudent } from "../actions/studentActions"
+import { loadStudent } from "../actions/globalActions"
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -15,7 +17,6 @@ import { Redirect } from "react-router";
 import axios from "axios";
 
 const styles = theme => {
-  console.log(theme);
   return {
     page: {
       display: "flex",
@@ -97,13 +98,22 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const API_ENDPOINT = "https://f-pismenost.herokuapp.com";
-    const API_ENDPOINTL = "http://0.0.0.0:3001";
-
     axios.get(API_ENDPOINT + "/grades").then(res => {
       console.table(res.data);
       this.setState({ grades: res.data });
     });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { userType } = this.props;
+
+    if (userType === "STUDENT") {
+      this.setState({redirect: <Redirect to="/ucenik"/>});
+    }
+    else if (userType === "PROFFESOR") {
+      this.setState({redirect: <Redirect to="/profesor"/>});
+    }
+
   }
 
   handleChange = event => {
@@ -112,22 +122,13 @@ class Login extends Component {
   };
 
   login = () => {
-    const { dispatch } = this.props;
-    dispatch({ type: "LOAD_USER_PENDING" });
-    loadStudent(this.state.email, this.state.password)
-      .payload.then(({ data }) => {
-        if (data.type === "student") {
-          this.setState({ redirect: <Redirect to="/ucenik" /> });
-          dispatch({ type: "LOAD_STUDENT_FULFILLED", payload: data });
-        } else {
-          this.setState({ redirect: <Redirect to="/profesor" /> });
-          dispatch({ type: "LOAD_PROFFESOR_FULFILLED", payload: data });
-        }
-      })
-      .catch(err => {
-        dispatch({ type: "LOAD_USER_FAILED", payload: err });
-      });
+    const { dispatch, userType } = this.props;
+    const { email, password } = this.state;
+    if (email && password) {
+      dispatch(loadStudent(email, password))
+    }
   };
+
   register = () => {
     const { dispatch } = this.props;
     dispatch(
@@ -159,8 +160,7 @@ class Login extends Component {
   }
 
   render() {
-    const { classes, loginError } = this.props;
-    console.log("LOGIN EROR", loginError);
+    const { classes, loadUserRejected } = this.props;
     if (this.state.isRegister) {
       return (
         <form className={classes.page}>
@@ -177,7 +177,7 @@ class Login extends Component {
               </Typography>
             </div>
             <Typography variant="caption" className={classes.errorCaption}>
-              {loginError ? "Pogrešni podatci" : ""}
+              {loadUserRejected ? "Pogrešni podatci" : ""}
             </Typography>
             <TextField
               label="Ime"
@@ -262,7 +262,7 @@ class Login extends Component {
             </Typography>
           </div>
           <Typography variant="caption" className={classes.errorCaption}>
-            {loginError ? "Pogrešni podatci" : ""}
+            {loadUserRejected ? "Pogrešni podatci" : ""}
           </Typography>
           <TextField
             label="Korisničko ime"
@@ -305,8 +305,7 @@ Login.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(store => {
-  return {
-    loginError: store.student.fail
-  };
-})(withStyles(styles)(Login));
+export default connect(store => ({
+  userType: store.global.userType,
+  loadUserRejected: store.global.loadUserRejected,
+}))(withStyles(styles)(Login));
