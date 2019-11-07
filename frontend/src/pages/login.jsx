@@ -78,6 +78,12 @@ const styles = theme => {
       right: 15,
       color: "white"
     },
+    EUtekst: {
+      position: "absolute",
+      bottom: 15,
+      left: 15,
+      color: "white"
+    },
     bottomLine: {
       position: "absolute",
       width: "100%",
@@ -290,6 +296,10 @@ class Login extends Component {
         </ContentCard>
         {this.state.redirect}
         <div className={classes.bottomLine}>
+          <span className={classes.EUtekst}>
+            Sadržaj ove aplikacije isključiva je odgovornost
+            Ekonomsko-birotehničke škole, Split
+          </span>
           <Button className={classes.regProf} onClick={this.regHandleClick}>
             {this.state.isRegister ? "Prijava" : "Registriraj se"}
           </Button>
