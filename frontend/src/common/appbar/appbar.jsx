@@ -41,7 +41,7 @@ class Appbar extends Component {
         <Toolbar className={classes.toolbar}>
           {this.props.beforeTitle}
           <Typography variant="title" color="inherit" className={classes.text}>
-            Financijska Pismenost
+            Upravljanje osobnim financijama
           </Typography>
           {this.props.children}
         </Toolbar>

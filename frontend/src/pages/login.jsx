@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ContentCard from "../common/content-card/contentCard";
 import { API_ENDPOINT } from "../data/apiRoutes";
-import wallpaper from "../images/wallpaper.jpg";
+import wallpaper from "../images/Ekonomska.png";
 import TextField from "@material-ui/core/TextField";
 import { Typography, Input } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { registerStudent } from "../actions/studentActions"
-import { loadStudent } from "../actions/globalActions"
+import { registerStudent } from "../actions/studentActions";
+import { loadStudent } from "../actions/globalActions";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -108,12 +108,10 @@ class Login extends Component {
     const { userType } = this.props;
 
     if (userType === "STUDENT") {
-      this.setState({redirect: <Redirect to="/ucenik"/>});
+      this.setState({ redirect: <Redirect to="/ucenik" /> });
+    } else if (userType === "PROFFESOR") {
+      this.setState({ redirect: <Redirect to="/profesor" /> });
     }
-    else if (userType === "PROFFESOR") {
-      this.setState({redirect: <Redirect to="/profesor"/>});
-    }
-
   }
 
   handleChange = event => {
@@ -125,7 +123,7 @@ class Login extends Component {
     const { dispatch, userType } = this.props;
     const { email, password } = this.state;
     if (email && password) {
-      dispatch(loadStudent(email, password))
+      dispatch(loadStudent(email, password));
     }
   };
 
@@ -307,5 +305,5 @@ Login.propTypes = {
 
 export default connect(store => ({
   userType: store.global.userType,
-  loadUserRejected: store.global.loadUserRejected,
+  loadUserRejected: store.global.loadUserRejected
 }))(withStyles(styles)(Login));
