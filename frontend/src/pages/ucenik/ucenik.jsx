@@ -33,14 +33,14 @@ const styles = theme => {
     },
     tekstEU: {
       position: "absolute",
-      left: 15,
+      right: 15,
       bottom: 15,
       color: "white"
     },
     EUslika: {
       display: "inline-block",
       position: "absolute",
-      right: 15
+      left: 0
     }
   };
 };

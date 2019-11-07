@@ -37,14 +37,14 @@ const styles = theme => {
     },
     tekstEU: {
       position: "absolute",
-      left: 15,
+      right: 15,
       bottom: 15,
       color: "white"
     },
     EUslika: {
       display: "inline-block",
       position: "absolute",
-      right: 15
+      left: 0
     }
   };
 };
@@ -118,11 +118,6 @@ class Profesor extends Component {
         {this.state.redirect}
 
         <div className={classes.bottomLine}>
-          <span className={classes.tekstEU}>
-            Projekt je sufinancirala europska unija iz Europskog socijalnog
-            fonda Sadržaj ove aplikacije isključiva je odgovornost
-            Ekonomsko-birotehničke škole, Split
-          </span>
           <img
             src={lenta}
             alt="EU strukturni fondovi"
@@ -130,6 +125,11 @@ class Profesor extends Component {
             width="180"
             className={classes.EUslika}
           />
+          <span className={classes.tekstEU}>
+            Projekt je sufinancirala europska unija iz Europskog socijalnog
+            fonda Sadržaj ove aplikacije isključiva je odgovornost
+            Ekonomsko-birotehničke škole, Split
+          </span>
         </div>
       </div>
     );
