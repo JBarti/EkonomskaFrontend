@@ -34,6 +34,7 @@ const styles = theme => ({
   }
 });
 
+
 let totalOutcome = (outcomes, year) => {
   return outcomes
     .filter(outcome => {
@@ -96,7 +97,6 @@ const GoalsFulfilledCard = props => {
   };
 
   let didInvest = !(saving.amount === 0 && saving.year === 0);
-
   return (
     <Card elevation={5} className={classes.root}>
       <CardHeader title={`Konačni rezultat`} />
@@ -105,7 +105,7 @@ const GoalsFulfilledCard = props => {
         <CardContent className={classes.cardContent}>
           <CardMedia
             style={{ width: 200, height: 200, marginTop: 20, marginBottom: 20 }}
-            image={savings + stabileDifference * 2 < 4400 ? laptopNo : laptop}
+            image={savings * 12 + stabileDifference * 2 < 4400 ? laptopNo : laptop}
           />
           <div className={classes.cardText}>
             <div style={{ fontSize: 20, color: grey[700] }}>
@@ -113,14 +113,14 @@ const GoalsFulfilledCard = props => {
             </div>
             <br />
             <div style={{ fontSize: 20, color: grey[700] }}>
-              Ostvareni dobitak: {savings + stabileDifference * 2}kn
+              Ostvareni dobitak: {stabileDifference * 2}kn
             </div>
             <br />
             <div style={{ fontSize: 20, color: grey[700] }}>
-              Ukupan iznos: {saving.amount - savings}kn
+              Ukupan iznos: {savings * 12 + stabileDifference * 2}kn
             </div>
             <br />
-            {didBuyLaptop(savings + stabileDifference * 2)}
+            {didBuyLaptop(savings * 12 + stabileDifference * 2)}
           </div>
         </CardContent>
       ) : (

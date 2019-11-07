@@ -247,9 +247,7 @@ class OutcomeCard extends Component {
                     ? () => {
                         this.setState({ displayedYear: displayedYear - 1 });
                       }
-                    : () => {
-                        console.log("NON");
-                      }
+                    : () => {}
                 }
               >
                 <IconButton disabled={displayedYear === 1}>
