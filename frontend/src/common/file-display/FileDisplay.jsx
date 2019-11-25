@@ -10,12 +10,12 @@ const styles = theme => ({
         height: '100%',
         overflowY: 'hidden'
     }
-})
+});
 
 
 class FileDisplay extends Component {
     render() {
-        const { classes } = this.props
+        const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <iframe

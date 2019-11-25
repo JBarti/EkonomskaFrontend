@@ -39,9 +39,7 @@ class Dashboard extends Component {
             ))}
             <DodajLekciju />
           </GridList>
-        ) : (
-          undefined
-        )}
+        ) : undefined}
         <Row>
           <StdlistCard grades={grades} />
           {Object.keys(selectedGrade).length ? (
@@ -49,9 +47,7 @@ class Dashboard extends Component {
               notifications={notifications}
               gradeId={selectedGrade.id}
             />
-          ) : (
-            undefined
-          )}
+          ) : undefined}
         </Row>
       </div>
     );

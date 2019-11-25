@@ -15,7 +15,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconBook from "@material-ui/icons/Book";
+import Attachment from "@material-ui/icons/Attachment";
 import IconQA from "@material-ui/icons/QuestionAnswer";
 import IconQuiz from "@material-ui/icons/School";
 import External from "./external";
@@ -293,10 +293,10 @@ class LekcijaCard extends Component {
               <div className={classes.toolbar} />
               <List>
                 <ListButtom
-                  primary={"Fileovi"}
+                  primary={"Datoteke"}
                   classes={{ text: classes.buttonText }}
                   iconColor="white"
-                  icon={<IconBook />}
+                  icon={<Attachment />}
                   onClick={this.openDrawer("file")}
                 />
                 <Collapse in={drawer.file}>

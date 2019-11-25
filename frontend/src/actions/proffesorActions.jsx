@@ -50,7 +50,6 @@ export function addTest(folderId, test) {
 }
 
 export function addFile(folderId, uploadFile) {
-  console.log("UPLOAD FILEEE", uploadFile);
   let data = new FormData();
   data.append("uploadFile", uploadFile);
   data.append("folderId", folderId);

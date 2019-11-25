@@ -7,13 +7,11 @@ import { red, green, grey } from "@material-ui/core/colors";
 const styles = theme => ({
   root: {
     width: "100%",
-    marginLeft: 10,
     overflowY: "hidden",
     overflowX: "auto"
   },
   cardContent: {
-    paddingTop: 0,
-    paddingTop: 15
+    paddingTop: 10
   }
 });
 
@@ -93,12 +91,16 @@ class MonthlyCard extends Component {
               legend={false}
               height={370}
               options={{
+                tooltips: { enabled: false },
                 maintainAspectRatio: false,
                 scales: {
                   xAxes: [
                     {
                       ticks: {
-                        display: false
+                        callback: function(item, index) {
+                          if (!(index % 12)) return (index)/12+1;
+                          },
+                        autoSkip: false
                       }
                     }
                   ]

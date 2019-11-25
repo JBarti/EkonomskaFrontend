@@ -1,5 +1,5 @@
-const API_ENDPOINTL = "https://f-pismenost.herokuapp.com";
-const API_ENDPOINT = "http://172.21.9.222:3001";
+const API_ENDPOINT = "https://f-pismenost.herokuapp.com";
+const API_ENDPOINTL = "http://0.0.0.0:3001";
 
 
 const UCENIK = {

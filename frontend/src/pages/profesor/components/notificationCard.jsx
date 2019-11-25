@@ -96,7 +96,7 @@ class NotifiactionCard extends Component {
       <ContentCard
         cardName={
           <div>
-            <div>Obavjesti</div>
+            <div>Obavijesti</div>
             <CreateNotificationDialog gradeId={gradeId} />
           </div>
         }

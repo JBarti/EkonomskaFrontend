@@ -15,7 +15,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import { addTest, addFile } from "../actions/proffesorActions";
 import { connect } from "react-redux";
-import PdfIcon from "@material-ui/icons/PictureAsPdf";
+import Attachment from "@material-ui/icons/Attachment";
 import QuizIcon from "@material-ui/icons/School";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
@@ -51,7 +51,7 @@ const styles = theme => ({
 });
 
 function Choice(props) {
-  const { whatIsChosen, handleChange, handleFileChosen } = props;
+  const { whatIsChosen, handleChange, handleFileChosen, file } = props;
   const testovi = ["Kviz", "Test"];
   if (testovi.includes(whatIsChosen)) {
     return (
@@ -83,7 +83,7 @@ function Choice(props) {
             component="span"
             style={{ marginTop: 25, marginLeft: 25 }}
           >
-            Upload
+            {file ? file.name : "Upload"}
           </Button>
         </label>
       </div>
@@ -95,7 +95,8 @@ function Choice(props) {
 class addNewDialog extends Component {
   state = {
     open: false,
-    value: "PDF"
+    value: "PDF",
+    file: null,
   };
 
   Choice = Choice.bind(this);
@@ -134,8 +135,6 @@ class addNewDialog extends Component {
         break;
       case "PDF":
         let { file } = this.state;
-        console.log("FAJL", file);
-        console.log(folderId);
         dispatch(addFile(folderId, file));
         break;
     }
@@ -173,8 +172,8 @@ class addNewDialog extends Component {
                   control={<Radio />}
                   label={
                     <div>
-                      <PdfIcon className={classes.icons} />
-                      PDF
+                      <Attachment className={classes.icons} />
+                      Datoteka
                     </div>
                   }
                 />
@@ -203,7 +202,8 @@ class addNewDialog extends Component {
             {this.Choice({
               whatIsChosen: this.state.value,
               handleChange: this.handleChange,
-              handleFileChosen: this.handleFileChosen
+              handleFileChosen: this.handleFileChosen,
+              file: this.state.file,
             })}
           </DialogContent>
           <DialogActions>

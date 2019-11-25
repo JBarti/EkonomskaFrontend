@@ -145,7 +145,7 @@ class Dashboard extends Component {
             />
           </Row>
         ) : (
-          <div />
+            <div style={{paddingTop: 150}}></div>
         )}
       </div>
     );

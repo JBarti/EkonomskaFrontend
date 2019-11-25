@@ -70,7 +70,7 @@ class NotifiactionCard extends Component {
     const { classes, notifications } = this.props;
     return (
       <Card className={classes.root} elevation={5}>
-        <CardHeader title={"Obavjesti"} className={classes.cardHeader} />
+        <CardHeader title={"Obavijesti"} className={classes.cardHeader} />
         <Divider />
         <CardContent className={classes.cardContent}>
           <List>
