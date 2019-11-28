@@ -84,15 +84,15 @@ class MonthlyCard extends Component {
         <Divider />
         <CardContent
           className={classes.cardContent}
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: "flex", flexDirection: "row", height: "90%" }}
         >
-          <div style={{ width: "100%" }}>
+          <div style={{ width: "100%", position: "relative", height: "90%" }}>
             <Line
               legend={false}
-              height={370}
               options={{
                 tooltips: { enabled: false },
                 maintainAspectRatio: false,
+                responsive: true,
                 scales: {
                   xAxes: [
                     {

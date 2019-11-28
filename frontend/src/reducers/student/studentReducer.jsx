@@ -24,21 +24,6 @@ export default function reducer(state = stateDefault, action) {
       };
       break;
     }
-    case "REGISTER_STUDENT_FULFILLED": {
-      let user = action.payload.data;
-      let { id, gradeId, firstName, lastName, email, solutions } = user;
-      newState = {
-        ...state,
-        id,
-        gradeId,
-        firstName,
-        lastName,
-        email,
-        solutions,
-        fail: false
-      };
-      break;
-    }
     case "SOLVE_TEST_FULFILLED": {
       let oldSolutions = state.solutions;
       let solutions = action.payload.data;

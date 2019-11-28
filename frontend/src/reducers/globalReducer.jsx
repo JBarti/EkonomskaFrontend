@@ -1,6 +1,8 @@
 let stateDefault = {
   userType: null,
   loadUserRejected: null,
+  registerFulfilled: null,
+  registerFailed: null,
 };
 
 export default function (state=stateDefault, action) {
@@ -24,6 +26,14 @@ export default function (state=stateDefault, action) {
     }
     case "LOGOUT_USER_FULFILLED": {
       newState = stateDefault;
+      break;
+    }
+    case "REGISTER_STUDENT_FULFILLED": {
+      newState = {...state, registerFulfilled: true};
+      break;
+    }
+    case "REGISTER_STUDENT_FAILED": {
+      newState = {...state, registerFailed: true};
       break;
     }
   }

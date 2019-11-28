@@ -144,17 +144,7 @@ class Login extends Component {
         this.state.razred
       )
     );
-    dispatch({ type: "REGISER_STUDENT_PENDING" });
-    loadStudent(this.state.email, this.state.password)
-      .payload.then(({ data }) => {
-        this.setState({ redirect: <Redirect to="/ucenik" /> });
-        dispatch({ type: "REGISTER_STUDENT_FULFILLED", payload: data });
-      })
-      .catch(err => {
-        dispatch({ type: "LOAD_USER_FAILED", payload: err });
-        console.error(err);
-        this.setState({ error: true });
-      });
+
   };
 
   regHandleClick() {
@@ -164,7 +154,12 @@ class Login extends Component {
   }
 
   render() {
-    const { classes, loadUserRejected } = this.props;
+    const { classes, loadUserRejected, registerFailed, registerFulfilled } = this.props;
+
+    if (registerFulfilled && this.state.isRegister) {
+      this.setState({isRegister: false});
+    }
+
     if (this.state.isRegister) {
       return (
         <form className={classes.page}>
@@ -181,7 +176,7 @@ class Login extends Component {
               </Typography>
             </div>
             <Typography variant="caption" className={classes.errorCaption}>
-              {loadUserRejected ? "Pogrešni podatci" : ""}
+              {registerFailed ? "Zauzeto korisničko ime" : ""}
             </Typography>
             <TextField
               label="Ime"
@@ -315,5 +310,7 @@ Login.propTypes = {
 
 export default connect(store => ({
   userType: store.global.userType,
-  loadUserRejected: store.global.loadUserRejected
+  loadUserRejected: store.global.loadUserRejected,
+  registerFulfilled: store.global.registerFulfilled,
+  registerFailed: store.global.registerFailed,
 }))(withStyles(styles)(Login));
