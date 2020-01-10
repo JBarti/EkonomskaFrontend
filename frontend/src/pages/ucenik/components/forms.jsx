@@ -110,7 +110,7 @@ class Forms extends Component {
             return (
               <FormControlLabel
                 classes={{ label: classes.radioLabel }}
-                value={question.id.toString() + qIndex.toString()}
+                value={question.id.toString() + "-" + qIndex.toString()}
                 label={answer.answer}
                 control={<Radio />}
               />
