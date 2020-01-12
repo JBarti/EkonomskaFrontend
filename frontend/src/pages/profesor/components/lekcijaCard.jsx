@@ -38,7 +38,7 @@ const styles = theme => ({
     marginTop: "15%",
     textAlign: "right",
     marginRight: "10%",
-    fontSize: 24
+    fontSize: 20
   },
   cardSubtitle: {
     marginTop: "2%",
@@ -46,7 +46,7 @@ const styles = theme => ({
     marginRight: "10%",
     marginLeft: "23%",
     width: "70%",
-    fontSize: 16,
+    fontSize: 14,
     opacity: 0.6
   },
   square: {

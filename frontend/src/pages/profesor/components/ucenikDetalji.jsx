@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
@@ -137,7 +141,8 @@ class LekcijaCard extends Component {
   );
   state = {
     open: false,
-    content: this.homePage
+    content: this.homePage,
+    warningDialog: false,
   };
 
   getTests = () => {
@@ -153,7 +158,6 @@ class LekcijaCard extends Component {
     let { classes } = this.props;
     let tests = this.getTests();
     let solutions = student.solutions || [];
-    console.log("TESTOVI", tests.length);
     this.handleClose();
     setTimeout(this.handleClickOpen, 410);
     setTimeout(() => {
@@ -223,10 +227,10 @@ class LekcijaCard extends Component {
   };
 
   incrementFinancialYear = () => {
-    console.log("ODHSAID");
     let financialYear = this.props.grade.financialYear + 1;
     let gradeId = this.props.grade.id;
     this.props.dispatch(updateFinancialYear(financialYear, gradeId));
+    this.setState({warningDialog: false})
   };
 
   render() {
@@ -254,15 +258,25 @@ class LekcijaCard extends Component {
               >
                 Financijska Razina: {Number(financialYear)}
               </Typography>
-              <span
-                onClick={
-                  financialYear < 3
-                    ? this.incrementFinancialYear
-                    : () => {
-                        console.log("NON");
-                      }
-                }
-              >
+              <Dialog open={this.state.warningDialog} style={{minWidth: 800}}>
+                <DialogTitle>Upozorenje</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Želite li povećati financijsku razinu odabranog razreda ?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button variant="contained" onClick={this.incrementFinancialYear} color="primary">Prihvati</Button>
+                  <Button variant="contained" onClick={() => {this.setState({warningDialog: false})}} color="secondary">Odbij</Button>
+                </DialogActions>
+              </Dialog>
+              <span onClick={
+                    financialYear < 3
+                        ? () => this.setState({warningDialog: true})
+                        : () => {
+                          console.log("NON");
+                        }
+                  }>
                 <IconButton disabled={financialYear >= 3}>
                   <PlusOne />
                 </IconButton>
