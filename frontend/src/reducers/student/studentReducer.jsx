@@ -25,10 +25,9 @@ export default function reducer(state = stateDefault, action) {
       break;
     }
     case "SOLVE_TEST_FULFILLED": {
-      let oldSolutions = state.solutions;
+      let oldSolutions = [... state.solutions];
       let solutions = action.payload.data;
       oldSolutions.push(solutions);
-      console.log(solutions);
       newState = { ...state, solutions: oldSolutions };
       break;
     }

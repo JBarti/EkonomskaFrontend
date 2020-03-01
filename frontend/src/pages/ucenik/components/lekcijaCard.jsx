@@ -163,7 +163,7 @@ class LekcijaCard extends Component {
     drawer: {
       file: false,
       test: false,
-      quiz: false
+      quiz: false,
     },
     content: startingScreen(this.props.classes, {
       name: this.props.folder.name,
@@ -229,9 +229,14 @@ class LekcijaCard extends Component {
   };
 
   render() {
-    const { classes, folder, solvedTests } = this.props;
+    const { classes, folder, solutions } = this.props;
     const { name, description, tests, files } = folder;
     const { drawer } = this.state;
+
+    let solvedTests = solutions
+      .filter(solution => !!solution)
+      .map(solution => solution.testId);
+
     return (
       <ContentCard
         classes={{

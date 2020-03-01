@@ -36,7 +36,8 @@ class Dashboard extends Component {
       job: { name: "", amount: 0 },
       outcomes: [],
       fees: [],
-      financeVariant: 0
+      financeVariant: 0,
+      solutions: this.props.solutions,
     };
   }
 
@@ -44,6 +45,7 @@ class Dashboard extends Component {
     loadSession();
     this.setState(newProp);
   }
+
 
   outcomeSliderChange = event => {
     let outcomes = [...this.state.outcomes];
@@ -59,14 +61,11 @@ class Dashboard extends Component {
       folders,
       notifications,
       studentId,
-      solutions,
       saving
     } = this.props;
+
+    const { solutions } = this.state;
     let tests = folders.map(folder => folder.tests).flat();
-    let solvedTests = solutions
-      .filter(solution => !!solution)
-      .map(solution => solution.testId);
-    console.log({fees: this.props.fees});
 
     let financeVariant = this.props.fees.find(fee => {
       return fee.name == "Grafiči dizajn";
@@ -91,7 +90,7 @@ class Dashboard extends Component {
               <LekcijaCard
                 folder={folder}
                 studentId={studentId}
-                solvedTests={solvedTests}
+                solutions={solutions}
               />
             ))}
           </GridList>
